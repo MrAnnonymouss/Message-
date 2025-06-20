@@ -54,7 +54,7 @@
   }
 
   body {
-    @apply font-sans antialiased;
+    @apply font-sans antialiased bg-black text-white;
     font-family: 'Inter', sans-serif;
     margin: 0;
     padding: 0;
@@ -65,18 +65,19 @@
   #root {
     height: 100vh;
     width: 100vw;
+    background: black;
   }
 }
 
 /* Custom animations and styles */
-@keyframes glow-pulse {
-  0% {
-    box-shadow: 0 0 20px rgba(255, 215, 0, 0.5), 0 0 40px rgba(255, 215, 0, 0.3), 0 0 60px rgba(255, 215, 0, 0.1);
+@keyframes slow-pulse {
+  0%, 100% {
     transform: scale(1);
+    opacity: 0.9;
   }
-  100% {
-    box-shadow: 0 0 30px rgba(255, 215, 0, 0.8), 0 0 60px rgba(255, 215, 0, 0.5), 0 0 90px rgba(255, 215, 0, 0.3);
-    transform: scale(1.05);
+  50% {
+    transform: scale(1.02);
+    opacity: 1;
   }
 }
 
@@ -112,6 +113,24 @@
   }
 }
 
+@keyframes zoom-in-transition {
+  0% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(1.1);
+  }
+}
+
+@keyframes text-float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
 .font-cormorant {
   font-family: 'Cormorant Garamond', serif;
 }
@@ -135,20 +154,21 @@
   animation: gradient-shift 12s ease-in-out infinite;
 }
 
-.button-glow {
-  background: linear-gradient(45deg, rgba(255, 215, 0, 0.1), rgba(255, 215, 0, 0.2));
-  border: 2px solid rgba(255, 215, 0, 0.3);
+.button-elegant {
+  background: linear-gradient(45deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.1));
+  border: 2px solid rgba(255, 255, 255, 0.2);
   backdrop-filter: blur(10px);
-  transition: all 0.3s ease;
+  transition: all 0.6s ease;
 }
 
-.button-glow:hover {
-  background: linear-gradient(45deg, rgba(255, 215, 0, 0.2), rgba(255, 215, 0, 0.3));
-  border-color: rgba(255, 215, 0, 0.6);
+.button-elegant:hover {
+  background: linear-gradient(45deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.15));
+  border-color: rgba(255, 255, 255, 0.4);
+  transform: translateY(-2px);
 }
 
-.animate-glow-pulse {
-  animation: glow-pulse 2s ease-in-out infinite alternate;
+.animate-slow-pulse {
+  animation: slow-pulse 4s ease-in-out infinite;
 }
 
 .animate-fade-in-up {
@@ -163,6 +183,14 @@
 
 .page-transition {
   transition: all 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.zoom-transition {
+  animation: zoom-in-transition 0.8s ease-out forwards;
+}
+
+.text-float {
+  animation: text-float 6s ease-in-out infinite;
 }
 
 /* Ensure smooth animations */

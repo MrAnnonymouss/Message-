@@ -5,6 +5,7 @@ export default function HomePage() {
   const [, setLocation] = useLocation();
   const [showContent, setShowContent] = useState(false);
   const [showButton, setShowButton] = useState(false);
+  const [isTransitioning, setIsTransitioning] = useState(false);
 
   useEffect(() => {
     // Fade in home content after 1 second
@@ -24,8 +25,11 @@ export default function HomePage() {
   }, []);
 
   const handleShowMessage = () => {
-    // Navigate to message page with elegant transition
-    setLocation("/message");
+    setIsTransitioning(true);
+    // Start zoom transition then navigate after animation begins
+    setTimeout(() => {
+      setLocation("/message");
+    }, 400);
   };
 
   const handleKeyDown = (e: React.KeyboardEvent) => {
@@ -37,7 +41,9 @@ export default function HomePage() {
 
   return (
     <div 
-      className="w-full h-screen bg-black flex items-center justify-center relative page-transition"
+      className={`w-full h-screen bg-black flex items-center justify-center relative page-transition ${
+        isTransitioning ? 'zoom-transition' : ''
+      }`}
       onKeyDown={handleKeyDown}
       tabIndex={0}
       role="main"
@@ -48,21 +54,21 @@ export default function HomePage() {
           showContent ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
         }`}
       >
-        <h1 className="font-cormorant text-white text-5xl md:text-7xl lg:text-8xl font-light mb-8 tracking-wide italic">
+        <h1 className="font-cormorant text-white text-5xl md:text-7xl lg:text-8xl font-light mb-8 tracking-wide italic text-float">
           Something Special
         </h1>
-        <p className="text-white text-xl md:text-2xl opacity-80 mb-16 font-light font-crimson tracking-wide">
+        <p className="text-white text-xl md:text-2xl opacity-80 mb-16 font-light font-crimson tracking-wide animate-fade-in-up" style={{animationDelay: '0.5s', animationFillMode: 'both'}}>
           A heartfelt message awaits...
         </p>
         
         <button 
           onClick={handleShowMessage}
-          className={`button-glow text-white font-cormorant text-2xl md:text-3xl px-10 py-5 rounded-full 
-                     transition-all duration-1000 ease-out hover:scale-105 active:scale-95 animate-glow-pulse
-                     focus:outline-none focus:ring-2 focus:ring-yellow-400 focus:ring-opacity-50 tracking-wide ${
+          className={`button-elegant text-white font-cormorant text-2xl md:text-3xl px-10 py-5 rounded-full 
+                     transition-all duration-1000 ease-out hover:scale-105 active:scale-95 animate-slow-pulse
+                     focus:outline-none focus:ring-2 focus:ring-white focus:ring-opacity-30 tracking-wide ${
                        showButton ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
                      }`}
-          disabled={!showButton}
+          disabled={!showButton || isTransitioning}
           aria-label="Show the special message"
         >
           Show Message
