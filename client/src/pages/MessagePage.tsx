@@ -3,6 +3,7 @@ import { useLocation } from "wouter";
 import { useTypingAnimation } from "@/hooks/useTypingAnimation";
 import { useAudio } from "@/hooks/useAudio";
 import { messageText } from "@/data/message";
+import ParticleBackground from "@/components/ParticleBackground";
 
 export default function MessagePage() {
   const [, setLocation] = useLocation();
@@ -60,9 +61,11 @@ export default function MessagePage() {
       role="main"
       aria-label="Message page"
     >
-      <div className="w-full max-w-6xl text-white text-xl md:text-2xl lg:text-3xl leading-relaxed font-crimson tracking-wide">
+      <ParticleBackground type="message" particleCount={60} />
+      
+      <div className="w-full max-w-6xl text-white text-xl md:text-2xl lg:text-3xl leading-relaxed font-crimson tracking-wide relative z-10">
         {displayText.split('\n').map((line, index) => (
-          <p key={index} className="mb-6 text-center">
+          <p key={index} className="mb-6 text-center drop-shadow-lg">
             {line}
           </p>
         ))}
@@ -72,7 +75,7 @@ export default function MessagePage() {
       {showReturnButton && (
         <button
           onClick={handleReturn}
-          className="mt-16 button-elegant text-white font-cormorant text-xl px-8 py-4 rounded-full hover:scale-105 transition-all duration-300"
+          className="mt-16 button-elegant text-white font-cormorant text-xl px-8 py-4 rounded-full hover:scale-105 transition-all duration-300 relative z-10 drop-shadow-lg"
           aria-label="Return to homepage"
         >
           Return to Home

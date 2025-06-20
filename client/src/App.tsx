@@ -11,7 +11,7 @@ import NotFound from "@/pages/not-found";
 
 function MusicPermissionScreen({ onPermission, isClosing }: { onPermission: (allow: boolean) => void, isClosing: boolean }) {
   return (
-    <div className="w-full h-screen gradient-bg-home flex items-center justify-center">
+    <div className="w-full h-screen bg-black flex items-center justify-center">
       <div className={`bg-black bg-opacity-80 backdrop-blur-lg border border-white border-opacity-20 rounded-2xl p-8 max-w-md mx-4 text-center transition-all duration-2000 ${isClosing ? 'fade-out-slow' : ''}`}>
         <h2 className="font-cormorant text-white text-3xl mb-6">Welcome</h2>
         <p className="text-white text-lg opacity-80 mb-8 font-crimson">
