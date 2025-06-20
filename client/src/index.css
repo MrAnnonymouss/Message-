@@ -116,9 +116,11 @@
 @keyframes zoom-in-transition {
   0% {
     transform: scale(1);
+    opacity: 1;
   }
   100% {
-    transform: scale(1.1);
+    transform: scale(1.05);
+    opacity: 0.8;
   }
 }
 
@@ -127,7 +129,18 @@
     transform: translateY(0px);
   }
   50% {
-    transform: translateY(-10px);
+    transform: translateY(-15px);
+  }
+}
+
+@keyframes slow-fade-in {
+  0% {
+    opacity: 0;
+    transform: translateY(30px) scale(0.95);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
   }
 }
 
@@ -186,11 +199,15 @@
 }
 
 .zoom-transition {
-  animation: zoom-in-transition 0.8s ease-out forwards;
+  animation: zoom-in-transition 1.2s ease-out forwards;
 }
 
 .text-float {
-  animation: text-float 6s ease-in-out infinite;
+  animation: text-float 8s ease-in-out infinite;
+}
+
+.slow-fade-in {
+  animation: slow-fade-in 2s ease-out forwards;
 }
 
 /* Ensure smooth animations */

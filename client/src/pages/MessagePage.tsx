@@ -1,12 +1,14 @@
 import { useState, useEffect } from "react";
 import { useLocation } from "wouter";
 import { useTypingAnimation } from "@/hooks/useTypingAnimation";
+import { useAudio } from "@/hooks/useAudio";
 import { messageText } from "@/data/message";
 
 export default function MessagePage() {
   const [, setLocation] = useLocation();
   const [showReturnButton, setShowReturnButton] = useState(false);
-  const { displayText, isComplete } = useTypingAnimation(messageText, 120); // 120ms per character for elegant slow reveal
+  const { displayText, isComplete } = useTypingAnimation(messageText, 150); // 150ms per character for even slower reveal
+  const { fadeOut, stop } = useAudio("/attached_assets/Song1_1750453164009.mp3");
 
   useEffect(() => {
     if (isComplete) {
@@ -18,7 +20,17 @@ export default function MessagePage() {
     }
   }, [isComplete]);
 
-  const handleReturn = () => {
+  const handleReturn = async () => {
+    // Fade out music
+    try {
+      await fadeOut();
+    } catch (error) {
+      console.log("Audio fade out failed:", error);
+    }
+    
+    // Stop audio completely
+    stop();
+    
     // Navigate back to homepage
     setLocation("/");
   };
