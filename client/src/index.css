@@ -393,9 +393,9 @@
   }
 }
 
-/* Simple beautiful gradient background */
+/* Elegant grey gradient background synchronized with typing */
 .gradient-bg-message {
-  background: linear-gradient(-45deg, #667eea, #764ba2, #8e44ad, #9b59b6, #e056fd);
+  background: linear-gradient(-45deg, #2c3e50, #34495e, #566b83, #607d8b, #90a4ae);
   background-size: 400% 400%;
   animation: gradientFlow 25s ease-in-out infinite;
   position: relative;
@@ -404,11 +404,15 @@
 }
 
 .gradient-bg-message.typing {
-  animation: gradientFlowTyping 6s ease-in-out infinite;
+  background: linear-gradient(-45deg, #1e3a8a, #1e40af, #3b82f6, #60a5fa, #93c5fd, #dbeafe);
+  background-size: 600% 600%;
+  animation: gradientFlowTyping 3s ease-in-out infinite;
 }
 
 .gradient-bg-message.typing-fast {
-  animation: gradientFlowTyping 6s ease-in-out infinite;
+  background: linear-gradient(-45deg, #6366f1, #8b5cf6, #a855f7, #c084fc, #d8b4fe, #e9d5ff);
+  background-size: 800% 800%;
+  animation: gradientFlowTypingFast 1.5s ease-in-out infinite;
 }
 
 @keyframes gradientFlow {
@@ -434,26 +438,114 @@
 
 @keyframes gradientFlowTyping {
   0% {
-    background-position: 0% 50%;
-    filter: brightness(1.1) saturate(1.2);
+    background-position: 0% 25%;
+    filter: brightness(1.2) saturate(1.3) contrast(1.1);
   }
-  50% {
+  33% {
+    background-position: 50% 75%;
+    filter: brightness(1.3) saturate(1.4) contrast(1.2);
+  }
+  66% {
     background-position: 100% 50%;
-    filter: brightness(1.2) saturate(1.3);
+    filter: brightness(1.4) saturate(1.5) contrast(1.3);
   }
   100% {
+    background-position: 0% 25%;
+    filter: brightness(1.2) saturate(1.3) contrast(1.1);
+  }
+}
+
+@keyframes gradientFlowTypingFast {
+  0% {
+    background-position: 0% 0%;
+    filter: brightness(1.3) saturate(1.5) contrast(1.2) hue-rotate(0deg);
+  }
+  25% {
+    background-position: 100% 50%;
+    filter: brightness(1.5) saturate(1.7) contrast(1.4) hue-rotate(90deg);
+  }
+  50% {
+    background-position: 50% 100%;
+    filter: brightness(1.4) saturate(1.6) contrast(1.3) hue-rotate(180deg);
+  }
+  75% {
     background-position: 0% 50%;
-    filter: brightness(1.1) saturate(1.2);
+    filter: brightness(1.6) saturate(1.8) contrast(1.5) hue-rotate(270deg);
+  }
+  100% {
+    background-position: 0% 0%;
+    filter: brightness(1.3) saturate(1.5) contrast(1.2) hue-rotate(360deg);
   }
 }
 
 
 
-/* Clean text without container */
+/* Enhanced text with dynamic effects */
 .message-text {
   text-shadow: 
-    2px 2px 4px rgba(0,0,0,0.8),
-    0 0 15px rgba(0,0,0,0.6);
+    2px 2px 8px rgba(0,0,0,0.9),
+    0 0 20px rgba(255,255,255,0.3),
+    0 0 40px rgba(255,255,255,0.1);
+  transition: all 0.3s ease-in-out;
+}
+
+.typing .message-text {
+  text-shadow: 
+    2px 2px 8px rgba(0,0,0,0.9),
+    0 0 25px rgba(59,130,246,0.5),
+    0 0 50px rgba(147,197,253,0.3);
+  animation: textPulse 2s ease-in-out infinite alternate;
+}
+
+.typing-fast .message-text {
+  text-shadow: 
+    2px 2px 8px rgba(0,0,0,0.9),
+    0 0 30px rgba(139,92,246,0.7),
+    0 0 60px rgba(196,181,253,0.5);
+  animation: textPulseFast 1s ease-in-out infinite alternate;
+}
+
+@keyframes textPulse {
+  from {
+    filter: brightness(1);
+  }
+  to {
+    filter: brightness(1.2);
+  }
+}
+
+@keyframes textPulseFast {
+  from {
+    filter: brightness(1.1) drop-shadow(0 0 10px rgba(139,92,246,0.5));
+  }
+  to {
+    filter: brightness(1.4) drop-shadow(0 0 20px rgba(196,181,253,0.8));
+  }
+}
+
+/* Background overlay elements */
+.gradient-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(circle at 20% 50%, rgba(255,255,255,0.1) 0%, transparent 50%),
+              radial-gradient(circle at 80% 20%, rgba(255,255,255,0.05) 0%, transparent 50%),
+              radial-gradient(circle at 40% 80%, rgba(255,255,255,0.08) 0%, transparent 50%);
+  pointer-events: none;
+  animation: overlayShift 15s ease-in-out infinite;
+}
+
+@keyframes overlayShift {
+  0%, 100% {
+    transform: translateX(0) translateY(0) scale(1);
+    opacity: 0.3;
+  }
+  50% {
+    transform: translateX(20px) translateY(-20px) scale(1.1);
+    opacity: 0.6;
+  }
 }
 
 /* Mobile-first responsive design */
