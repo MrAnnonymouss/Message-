@@ -47,7 +47,7 @@ export default function HomePage({ musicEnabled }: { musicEnabled: boolean }) {
       
       <button
         onClick={handleShowMessage}
-        className={`button-elegant text-white font-cormorant text-2xl md:text-3xl px-10 py-5 rounded-full 
+        className={`button-elegant text-white font-sf-pro font-medium text-2xl md:text-3xl px-10 py-5 rounded-full 
                    transition-all duration-1500 ease-out hover:scale-105 active:scale-95 animate-slow-pulse
                    focus:outline-none focus:ring-2 focus:ring-white focus:ring-opacity-30 tracking-wide relative z-10 drop-shadow-lg ${
                      showButton

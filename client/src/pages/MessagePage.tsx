@@ -9,6 +9,7 @@ export default function MessagePage() {
   const [, setLocation] = useLocation();
   const [showReturnButton, setShowReturnButton] = useState(false);
   const [typingIntensity, setTypingIntensity] = useState<'normal' | 'fast'>('normal');
+  const [showCyan, setShowCyan] = useState(false);
   const { displayText, isComplete } = useTypingAnimation(messageText, 80); // 80ms per character for faster reveal
   const { fadeOut, stop } = useAudio("/attached_assets/Song1_1750453164009.mp3");
 
@@ -31,6 +32,15 @@ export default function MessagePage() {
       setTypingIntensity('normal');
     }
   }, [displayText.length, messageText.length]);
+
+  // Add cyan to gradient after 5 seconds
+  useEffect(() => {
+    const cyanTimer = setTimeout(() => {
+      setShowCyan(true);
+    }, 5000);
+
+    return () => clearTimeout(cyanTimer);
+  }, []);
 
   const handleReturn = async () => {
     // Fade out music
@@ -68,7 +78,7 @@ export default function MessagePage() {
     <div 
       className={`w-full min-h-screen gradient-bg-message flex flex-col items-center justify-center p-8 md:p-12 lg:p-16 page-transition zoom-in-transition ${
         !isComplete ? (typingIntensity === 'fast' ? "typing-fast" : "typing") : ""
-      }`}
+      } ${showCyan ? "cyan-enhanced" : ""}`}
       onKeyDown={handleKeyDown}
       tabIndex={0}
       role="main"
@@ -76,14 +86,14 @@ export default function MessagePage() {
     >
       <ParticleBackground type="message" particleCount={60} intensity="high" />
       
-      <div className="w-full max-w-5xl relative z-10 message-text text-white text-xl md:text-2xl lg:text-3xl leading-relaxed font-crimson tracking-wide">
+      <div className="w-full max-w-5xl relative z-10 message-text text-white text-xl md:text-2xl lg:text-3xl leading-relaxed font-sf-pro tracking-wide font-light">
         {displayText.split('\n').map((line, index) => (
           <p key={index} className="mb-6 md:mb-8 text-center">
             {line}
           </p>
         ))}
         {!isComplete && (
-          <span className="typing-cursor text-center block text-2xl md:text-3xl lg:text-4xl" aria-hidden="true">
+          <span className="typing-cursor text-center block text-2xl md:text-3xl lg:text-4xl font-sf-rounded" aria-hidden="true">
             |
           </span>
         )}
@@ -92,7 +102,7 @@ export default function MessagePage() {
       {showReturnButton && (
         <button
           onClick={handleReturn}
-          className="mt-8 md:mt-12 lg:mt-16 button-elegant text-white font-cormorant text-lg md:text-xl px-6 md:px-8 py-3 md:py-4 rounded-full hover:scale-105 transition-all duration-300 relative z-10 drop-shadow-lg"
+          className="mt-8 md:mt-12 lg:mt-16 button-elegant text-white font-sf-pro font-medium text-lg md:text-xl px-6 md:px-8 py-3 md:py-4 rounded-full hover:scale-105 transition-all duration-300 relative z-10 drop-shadow-lg"
           aria-label="Return to homepage"
         >
           Return to Home
