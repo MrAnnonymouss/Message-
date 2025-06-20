@@ -7,6 +7,7 @@ export default function HomePage() {
   const [showContent, setShowContent] = useState(false);
   const [showButton, setShowButton] = useState(false);
   const [isTransitioning, setIsTransitioning] = useState(false);
+  const [showMusicDialog, setShowMusicDialog] = useState(false);
   const { playWithFadeIn } = useAudio("/attached_assets/Song1_1750453164009.mp3");
 
   useEffect(() => {
@@ -26,14 +27,22 @@ export default function HomePage() {
     };
   }, []);
 
-  const handleShowMessage = async () => {
+  const handleShowMessage = () => {
+    // Show music permission dialog first
+    setShowMusicDialog(true);
+  };
+
+  const handleMusicPermission = async (allowMusic: boolean) => {
+    setShowMusicDialog(false);
     setIsTransitioning(true);
     
-    // Start playing music with fade-in
-    try {
-      await playWithFadeIn();
-    } catch (error) {
-      console.log("Audio playback failed:", error);
+    if (allowMusic) {
+      // Start playing music with fade-in
+      try {
+        await playWithFadeIn();
+      } catch (error) {
+        console.log("Audio playback failed:", error);
+      }
     }
     
     // Slower transition - wait longer before navigating
@@ -43,7 +52,7 @@ export default function HomePage() {
   };
 
   const handleKeyDown = (e: React.KeyboardEvent) => {
-    if ((e.key === 'Enter' || e.key === ' ') && showButton) {
+    if ((e.key === 'Enter' || e.key === ' ') && showButton && !showMusicDialog) {
       e.preventDefault();
       handleShowMessage();
     }
@@ -58,6 +67,7 @@ export default function HomePage() {
       tabIndex={0}
       role="main"
       aria-label="Homepage"
+      style={{ backgroundColor: '#000000' }}
     >
       <div 
         className={`text-center transition-all duration-2000 ease-out ${
@@ -84,6 +94,32 @@ export default function HomePage() {
           {isTransitioning ? 'Loading...' : 'Show Message'}
         </button>
       </div>
+
+      {/* Music Permission Dialog */}
+      {showMusicDialog && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 backdrop-blur-sm">
+          <div className="bg-black bg-opacity-80 backdrop-blur-lg border border-white border-opacity-20 rounded-2xl p-8 max-w-md mx-4 text-center">
+            <h3 className="font-cormorant text-white text-2xl mb-4">Background Music</h3>
+            <p className="text-white text-lg opacity-80 mb-6 font-crimson">
+              Would you like to play background music while reading the message?
+            </p>
+            <div className="flex gap-4 justify-center">
+              <button
+                onClick={() => handleMusicPermission(true)}
+                className="button-elegant text-white font-cormorant text-lg px-6 py-3 rounded-full hover:scale-105 transition-all duration-300"
+              >
+                Yes, Play Music
+              </button>
+              <button
+                onClick={() => handleMusicPermission(false)}
+                className="bg-transparent border-2 border-white border-opacity-30 text-white font-cormorant text-lg px-6 py-3 rounded-full hover:border-opacity-60 hover:scale-105 transition-all duration-300"
+              >
+                No, Silent Mode
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
