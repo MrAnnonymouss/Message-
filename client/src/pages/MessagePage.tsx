@@ -7,7 +7,7 @@ import { messageText } from "@/data/message";
 export default function MessagePage() {
   const [, setLocation] = useLocation();
   const [showReturnButton, setShowReturnButton] = useState(false);
-  const { displayText, isComplete } = useTypingAnimation(messageText, 150); // 150ms per character for even slower reveal
+  const { displayText, isComplete } = useTypingAnimation(messageText, 80); // 80ms per character for faster reveal
   const { fadeOut, stop } = useAudio("/attached_assets/Song1_1750453164009.mp3");
 
   useEffect(() => {

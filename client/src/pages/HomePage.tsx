@@ -8,15 +8,31 @@ export default function HomePage() {
   const [showButton, setShowButton] = useState(false);
   const [isTransitioning, setIsTransitioning] = useState(false);
   const [showMusicDialog, setShowMusicDialog] = useState(false);
+  const [musicStarted, setMusicStarted] = useState(false);
   const { playWithFadeIn } = useAudio("/attached_assets/Song1_1750453164009.mp3");
 
   useEffect(() => {
-    // Fade in home content after 2 seconds (slower)
+    // Start background music immediately when component mounts
+    const startMusic = async () => {
+      if (!musicStarted) {
+        try {
+          await playWithFadeIn();
+          setMusicStarted(true);
+        } catch (error) {
+          console.log("Auto-play failed, will show dialog later:", error);
+        }
+      }
+    };
+
+    // Try to start music immediately
+    startMusic();
+
+    // Fade in home content after 2 seconds
     const contentTimer = setTimeout(() => {
       setShowContent(true);
     }, 2000);
 
-    // Show button after 5 seconds (slower)
+    // Show button after 5 seconds
     const buttonTimer = setTimeout(() => {
       setShowButton(true);
     }, 5000);
@@ -25,27 +41,36 @@ export default function HomePage() {
       clearTimeout(contentTimer);
       clearTimeout(buttonTimer);
     };
-  }, []);
+  }, [playWithFadeIn, musicStarted]);
 
   const handleShowMessage = () => {
-    // Show music permission dialog first
-    setShowMusicDialog(true);
+    // If music hasn't started yet, show permission dialog
+    if (!musicStarted) {
+      setShowMusicDialog(true);
+    } else {
+      // Music is already playing, go directly to message
+      setIsTransitioning(true);
+      setTimeout(() => {
+        setLocation("/message");
+      }, 1200);
+    }
   };
 
   const handleMusicPermission = async (allowMusic: boolean) => {
     setShowMusicDialog(false);
     setIsTransitioning(true);
-
-    if (allowMusic) {
+    
+    if (allowMusic && !musicStarted) {
       // Start playing music with fade-in
       try {
         await playWithFadeIn();
+        setMusicStarted(true);
       } catch (error) {
         console.log("Audio playback failed:", error);
       }
     }
-
-    // Slower transition - wait longer before navigating
+    
+    // Navigate to message page
     setTimeout(() => {
       setLocation("/message");
     }, 1200);
@@ -118,20 +143,20 @@ export default function HomePage() {
               Background Music
             </h3>
             <p className="text-white text-lg opacity-80 mb-6 font-crimson">
-              Would you like to play background music while reading the message?
+              Would you like to enable background music for this experience?
             </p>
             <div className="flex gap-4 justify-center">
               <button
                 onClick={() => handleMusicPermission(true)}
                 className="button-elegant text-white font-cormorant text-lg px-6 py-3 rounded-full hover:scale-105 transition-all duration-300"
               >
-                Yes, Play Music
+                Yes, Enable Music
               </button>
               <button
                 onClick={() => handleMusicPermission(false)}
                 className="bg-transparent border-2 border-white border-opacity-30 text-white font-cormorant text-lg px-6 py-3 rounded-full hover:border-opacity-60 hover:scale-105 transition-all duration-300"
               >
-                No, Silent Mode
+                Continue Silently
               </button>
             </div>
           </div>
