@@ -9,6 +9,7 @@ export default function MessagePage() {
   const [, setLocation] = useLocation();
   const [showReturnButton, setShowReturnButton] = useState(false);
   const [typingIntensity, setTypingIntensity] = useState<'normal' | 'fast'>('normal');
+  const [showPurpleGradient, setShowPurpleGradient] = useState(false);
   const { displayText, isComplete } = useTypingAnimation(messageText, 80); // 80ms per character for faster reveal
   const { fadeOut, stop } = useAudio("/attached_assets/Song1_1750453164009.mp3");
 
@@ -31,6 +32,15 @@ export default function MessagePage() {
       setTypingIntensity('normal');
     }
   }, [displayText.length, messageText.length]);
+
+  // Show purple gradient after 30 seconds
+  useEffect(() => {
+    const purpleTimer = setTimeout(() => {
+      setShowPurpleGradient(true);
+    }, 30000); // 30 seconds
+
+    return () => clearTimeout(purpleTimer);
+  }, []);
 
 
 
@@ -70,7 +80,7 @@ export default function MessagePage() {
     <div 
       className={`w-full min-h-screen gradient-bg-message flex flex-col items-center justify-center p-8 md:p-12 lg:p-16 page-transition zoom-in-transition ${
         !isComplete ? (typingIntensity === 'fast' ? "typing-fast" : "typing") : ""
-      }`}
+      } ${showPurpleGradient ? "purple-transition" : ""}`}
       onKeyDown={handleKeyDown}
       tabIndex={0}
       role="main"

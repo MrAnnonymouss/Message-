@@ -393,12 +393,18 @@
   }
 }
 
-/* Simple black background */
+/* Black background with purple gradient transition */
 .gradient-bg-message {
   background: #000000;
   position: relative;
   overflow: hidden;
-  transition: all 0.5s ease-in-out;
+  transition: all 2s ease-in-out;
+}
+
+.gradient-bg-message.purple-transition {
+  background: linear-gradient(-45deg, #667eea, #764ba2, #8e44ad, #9b59b6, #e056fd);
+  background-size: 400% 400%;
+  animation: gradientFlow 25s ease-in-out infinite;
 }
 
 .gradient-bg-message.typing {
