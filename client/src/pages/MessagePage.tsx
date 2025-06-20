@@ -33,14 +33,6 @@ export default function MessagePage() {
     }
   }, [displayText.length, messageText.length]);
 
-  // Auto-scroll to bottom when new text appears
-  useEffect(() => {
-    const messageContainer = document.querySelector('.scrollable-message');
-    if (messageContainer && !isComplete) {
-      messageContainer.scrollTop = messageContainer.scrollHeight;
-    }
-  }, [displayText, isComplete]);
-
   // Show purple gradient after 30 seconds
   useEffect(() => {
     const purpleTimer = setTimeout(() => {
@@ -96,7 +88,7 @@ export default function MessagePage() {
     >
       <ParticleBackground type="message" particleCount={60} intensity="high" />
       
-      <div className="w-full max-w-5xl relative z-10 message-text text-white text-xl md:text-2xl lg:text-3xl leading-relaxed font-sf-pro tracking-wide font-light max-h-[80vh] overflow-y-auto scrollable-message">
+      <div className="w-full max-w-5xl relative z-10 message-text text-white text-xl md:text-2xl lg:text-3xl leading-relaxed font-sf-pro tracking-wide font-light">
         {displayText.split('\n').map((line, index) => (
           <p key={index} className="mb-6 md:mb-8 text-center">
             {line}

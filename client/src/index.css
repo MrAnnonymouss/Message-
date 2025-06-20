@@ -487,36 +487,6 @@
     0 0 15px rgba(255,255,255,0.2);
 }
 
-/* Scrollable message styling */
-.scrollable-message {
-  scrollbar-width: thin;
-  scrollbar-color: rgba(255,255,255,0.3) transparent;
-}
-
-.scrollable-message::-webkit-scrollbar {
-  width: 8px;
-}
-
-.scrollable-message::-webkit-scrollbar-track {
-  background: rgba(255,255,255,0.1);
-  border-radius: 4px;
-}
-
-.scrollable-message::-webkit-scrollbar-thumb {
-  background: rgba(255,255,255,0.3);
-  border-radius: 4px;
-  transition: background 0.3s ease;
-}
-
-.scrollable-message::-webkit-scrollbar-thumb:hover {
-  background: rgba(255,255,255,0.5);
-}
-
-/* Auto-scroll to bottom when typing */
-.auto-scroll {
-  scroll-behavior: smooth;
-}
-
 /* Background overlay elements */
 .gradient-overlay {
   position: absolute;
