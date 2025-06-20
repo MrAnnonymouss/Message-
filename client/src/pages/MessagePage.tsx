@@ -88,19 +88,21 @@ export default function MessagePage() {
     >
       <ParticleBackground type="message" particleCount={60} intensity="high" />
       
-      <div className="w-full max-w-5xl relative z-10 message-text">
-        <div className="premium-gradient-text font-bold text-2xl md:text-3xl lg:text-4xl xl:text-5xl leading-relaxed tracking-wide text-center animate-speaking">
-          {displayText.split('\n').map((line, index) => (
-            <p key={index} className="mb-6 md:mb-8 animate-word-glow">
-              {line}
-            </p>
-          ))}
+      <div className="w-full max-w-5xl relative z-10">
+        <div className={`message-container ${!isComplete ? 'typing-active' : 'typing-complete'}`}>
+          <div className="message-text-clean font-bold text-2xl md:text-3xl lg:text-4xl xl:text-5xl leading-relaxed tracking-wide text-center">
+            {displayText.split('\n').map((line, index) => (
+              <p key={index} className="mb-6 md:mb-8">
+                {line}
+              </p>
+            ))}
+          </div>
+          {!isComplete && (
+            <span className="typing-cursor-clean text-center block text-3xl md:text-4xl lg:text-5xl" aria-hidden="true">
+              |
+            </span>
+          )}
         </div>
-        {!isComplete && (
-          <span className="typing-cursor-premium text-center block text-3xl md:text-4xl lg:text-5xl" aria-hidden="true">
-            |
-          </span>
-        )}
       </div>
       
       {showReturnButton && (

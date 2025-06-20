@@ -196,101 +196,57 @@
   color: #FFD700;
 }
 
-/* Premium animated gradient text */
-.premium-gradient-text {
-  background: linear-gradient(
-    45deg,
-    #ff6b6b,
-    #ffd93d,
-    #6bcf7f,
-    #4d96ff,
-    #9b59b6,
-    #ff9ff3,
-    #54a0ff,
-    #5f27cd,
-    #00d2d3,
-    #ff9ff3,
-    #feca57,
-    #ff6b6b
-  );
-  background-size: 400% 400%;
-  background-clip: text;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  animation: gradientShift 8s ease-in-out infinite;
-  text-shadow: 0 0 30px rgba(255, 255, 255, 0.5);
-  filter: drop-shadow(0 0 20px rgba(255, 255, 255, 0.3));
+/* Clean message container with curved borders */
+.message-container {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 24px;
+  padding: 2rem 3rem;
+  margin: 1rem;
+  transition: all 0.3s ease-in-out;
 }
 
-/* Speaking animation - subtle pulsing and scaling */
-.animate-speaking {
-  animation: speaking 4s ease-in-out infinite;
+.message-container.typing-active {
+  animation: typingRhythm 2s ease-in-out infinite;
+  border-color: rgba(255, 255, 255, 0.2);
 }
 
-@keyframes speaking {
+.message-container.typing-complete {
+  animation: none;
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.15);
+}
+
+@keyframes typingRhythm {
   0%, 100% {
-    transform: scale(1);
-    filter: drop-shadow(0 0 20px rgba(255, 255, 255, 0.3));
-  }
-  25% {
-    transform: scale(1.02);
-    filter: drop-shadow(0 0 30px rgba(255, 107, 107, 0.4));
+    transform: translateY(0px) scale(1);
+    background: rgba(255, 255, 255, 0.05);
   }
   50% {
-    transform: scale(1.01);
-    filter: drop-shadow(0 0 25px rgba(107, 207, 127, 0.4));
-  }
-  75% {
-    transform: scale(1.015);
-    filter: drop-shadow(0 0 35px rgba(77, 150, 255, 0.4));
+    transform: translateY(-2px) scale(1.002);
+    background: rgba(255, 255, 255, 0.07);
   }
 }
 
-/* Individual word glow effect */
-.animate-word-glow {
-  animation: wordGlow 6s ease-in-out infinite;
+/* Clean text styling without glowing effects */
+.message-text-clean {
+  color: #ffffff;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
 }
 
-@keyframes wordGlow {
-  0%, 100% {
-    text-shadow: 
-      0 0 10px rgba(255, 255, 255, 0.3),
-      0 0 20px rgba(255, 107, 107, 0.2),
-      0 0 30px rgba(255, 107, 107, 0.1);
-  }
-  33% {
-    text-shadow: 
-      0 0 15px rgba(255, 255, 255, 0.4),
-      0 0 25px rgba(107, 207, 127, 0.3),
-      0 0 35px rgba(107, 207, 127, 0.2);
-  }
-  66% {
-    text-shadow: 
-      0 0 12px rgba(255, 255, 255, 0.35),
-      0 0 22px rgba(77, 150, 255, 0.25),
-      0 0 32px rgba(77, 150, 255, 0.15);
-  }
+/* Clean typing cursor */
+.typing-cursor-clean {
+  color: #ffffff;
+  animation: typingCursorClean 1s ease-in-out infinite;
 }
 
-/* Premium typing cursor */
-.typing-cursor-premium {
-  background: linear-gradient(45deg, #ff6b6b, #ffd93d, #6bcf7f, #4d96ff);
-  background-size: 300% 300%;
-  background-clip: text;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  animation: typing-cursor-premium 1s infinite, gradientShift 3s ease-in-out infinite;
-  filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.6));
-}
-
-@keyframes typing-cursor-premium {
+@keyframes typingCursorClean {
   0%, 50% {
     opacity: 1;
-    transform: scale(1);
   }
   51%, 100% {
     opacity: 0;
-    transform: scale(1.1);
   }
 }
 
@@ -631,11 +587,15 @@
 
 /* Mobile-first responsive design */
 @media (max-width: 767px) {
-  .message-text {
+  .message-container {
+    padding: 1.5rem 2rem;
+    margin: 0.5rem;
+    border-radius: 16px;
+  }
+  
+  .message-text-clean {
     font-size: 1rem !important;
     line-height: 1.6;
-    padding: 0.75rem;
-    margin-bottom: 1rem;
   }
   
   .particle {
@@ -648,18 +608,28 @@
 }
 
 @media (min-width: 768px) and (max-width: 1023px) {
-  .message-text {
+  .message-container {
+    padding: 1.75rem 2.5rem;
+    margin: 0.75rem;
+    border-radius: 20px;
+  }
+  
+  .message-text-clean {
     font-size: 1.25rem !important;
     line-height: 1.7;
-    padding: 1rem;
   }
 }
 
 @media (min-width: 1024px) {
-  .message-text {
+  .message-container {
+    padding: 2rem 3rem;
+    margin: 1rem;
+    border-radius: 24px;
+  }
+  
+  .message-text-clean {
     font-size: 1.5rem !important;
     line-height: 1.8;
-    padding: 1.5rem;
   }
 }
 
