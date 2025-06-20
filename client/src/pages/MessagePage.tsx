@@ -54,7 +54,7 @@ export default function MessagePage() {
 
   return (
     <div 
-      className="w-full min-h-screen bg-black flex flex-col items-center justify-center p-8 md:p-12 lg:p-16 page-transition"
+      className="w-full min-h-screen gradient-bg-message flex flex-col items-center justify-center p-8 md:p-12 lg:p-16 page-transition zoom-in-transition"
       onKeyDown={handleKeyDown}
       tabIndex={0}
       role="main"

@@ -34,14 +34,13 @@ export default function HomePage({ musicEnabled }: { musicEnabled: boolean }) {
 
   return (
     <div
-      className={`w-full h-screen bg-black flex items-center justify-center relative page-transition ${
+      className={`w-full h-screen gradient-bg-home flex items-center justify-center relative page-transition ${
         isTransitioning ? "zoom-transition" : ""
       }`}
       onKeyDown={handleKeyDown}
       tabIndex={0}
       role="main"
       aria-label="Homepage"
-      style={{ backgroundColor: "#000000" }}
     >
       <button
         onClick={handleShowMessage}

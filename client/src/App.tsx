@@ -9,10 +9,10 @@ import HomePage from "@/pages/HomePage";
 import MessagePage from "@/pages/MessagePage";
 import NotFound from "@/pages/not-found";
 
-function MusicPermissionScreen({ onPermission }: { onPermission: (allow: boolean) => void }) {
+function MusicPermissionScreen({ onPermission, isClosing }: { onPermission: (allow: boolean) => void, isClosing: boolean }) {
   return (
-    <div className="w-full h-screen bg-black flex items-center justify-center">
-      <div className="bg-black bg-opacity-80 backdrop-blur-lg border border-white border-opacity-20 rounded-2xl p-8 max-w-md mx-4 text-center">
+    <div className="w-full h-screen gradient-bg-home flex items-center justify-center">
+      <div className={`bg-black bg-opacity-80 backdrop-blur-lg border border-white border-opacity-20 rounded-2xl p-8 max-w-md mx-4 text-center transition-all duration-2000 ${isClosing ? 'fade-out-slow' : ''}`}>
         <h2 className="font-cormorant text-white text-3xl mb-6">Welcome</h2>
         <p className="text-white text-lg opacity-80 mb-8 font-crimson">
           Would you like to enable background music for this experience?
@@ -48,12 +48,13 @@ function Router({ musicEnabled }: { musicEnabled: boolean }) {
 
 function App() {
   const [showMusicPermission, setShowMusicPermission] = useState(true);
+  const [isClosingPermission, setIsClosingPermission] = useState(false);
   const [musicEnabled, setMusicEnabled] = useState(false);
   const { playWithFadeIn } = useAudio("/attached_assets/Song1_1750453164009.mp3");
 
   const handleMusicPermission = async (allow: boolean) => {
     setMusicEnabled(allow);
-    setShowMusicPermission(false);
+    setIsClosingPermission(true);
     
     if (allow) {
       try {
@@ -62,13 +63,18 @@ function App() {
         console.log("Audio playback failed:", error);
       }
     }
+    
+    // Wait for fade out animation before hiding
+    setTimeout(() => {
+      setShowMusicPermission(false);
+    }, 2000);
   };
 
   if (showMusicPermission) {
     return (
       <QueryClientProvider client={queryClient}>
         <TooltipProvider>
-          <MusicPermissionScreen onPermission={handleMusicPermission} />
+          <MusicPermissionScreen onPermission={handleMusicPermission} isClosing={isClosingPermission} />
         </TooltipProvider>
       </QueryClientProvider>
     );
