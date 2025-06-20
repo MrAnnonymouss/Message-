@@ -218,6 +218,88 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+/* Beautiful gradient backgrounds */
+.gradient-bg-home {
+  background: radial-gradient(ellipse at center, #1a1a1a 0%, #000000 100%);
+  background-size: 200% 200%;
+  animation: gradientShift 8s ease-in-out infinite;
+}
+
+.gradient-bg-message {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background-size: 400% 400%;
+  animation: gradientFlow 12s ease-in-out infinite;
+}
+
+@keyframes gradientShift {
+  0%, 100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+@keyframes gradientFlow {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* Zoom in transition for message page */
+.zoom-in-transition {
+  animation: zoomIn 1.2s ease-out forwards;
+}
+
+@keyframes zoomIn {
+  0% {
+    transform: scale(0.8);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/* Enhanced zoom transition effect */
+.zoom-transition {
+  animation: zoomOut 1.2s ease-in-out forwards;
+}
+
+@keyframes zoomOut {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1.5);
+    opacity: 0;
+  }
+}
+
+/* Fade out animation for containers */
+.fade-out-slow {
+  animation: fadeOutSlow 2s ease-out forwards;
+}
+
+@keyframes fadeOutSlow {
+  0% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+}
+
 /* Custom scrollbar for message content */
 .message-scroll::-webkit-scrollbar {
   width: 6px;
