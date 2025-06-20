@@ -41,8 +41,8 @@ Reconnect with me.
 I want to know how you're doing.
 I want to talk to you—not to fix anything, just to feel that bond again.
 
-And yes… I'm very close to my success now.
+And yes… I'm very close to my First Biggest Success now.
 And honestly?
-I want to celebrate it with you—first, as a friend.
+I want to celebrate it with you—first, as a You Decide!.
 
 Hey Geet… please don't leave me, buddy. :)`;

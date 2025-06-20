@@ -2,86 +2,31 @@ import { useState, useEffect } from "react";
 import { useLocation } from "wouter";
 import { useAudio } from "@/hooks/useAudio";
 
-export default function HomePage() {
+export default function HomePage({ musicEnabled }: { musicEnabled: boolean }) {
   const [, setLocation] = useLocation();
-  const [showContent, setShowContent] = useState(false);
   const [showButton, setShowButton] = useState(false);
   const [isTransitioning, setIsTransitioning] = useState(false);
-  const [showMusicDialog, setShowMusicDialog] = useState(false);
-  const [musicStarted, setMusicStarted] = useState(false);
-  const { playWithFadeIn } = useAudio("/attached_assets/Song1_1750453164009.mp3");
 
   useEffect(() => {
-    // Start background music immediately when component mounts
-    const startMusic = async () => {
-      if (!musicStarted) {
-        try {
-          await playWithFadeIn();
-          setMusicStarted(true);
-        } catch (error) {
-          console.log("Auto-play failed, will show dialog later:", error);
-        }
-      }
-    };
-
-    // Try to start music immediately
-    startMusic();
-
-    // Fade in home content after 2 seconds
-    const contentTimer = setTimeout(() => {
-      setShowContent(true);
-    }, 2000);
-
-    // Show button after 5 seconds
+    // Show button after 3 seconds
     const buttonTimer = setTimeout(() => {
       setShowButton(true);
-    }, 5000);
+    }, 3000);
 
     return () => {
-      clearTimeout(contentTimer);
       clearTimeout(buttonTimer);
     };
-  }, [playWithFadeIn, musicStarted]);
+  }, []);
 
   const handleShowMessage = () => {
-    // If music hasn't started yet, show permission dialog
-    if (!musicStarted) {
-      setShowMusicDialog(true);
-    } else {
-      // Music is already playing, go directly to message
-      setIsTransitioning(true);
-      setTimeout(() => {
-        setLocation("/message");
-      }, 1200);
-    }
-  };
-
-  const handleMusicPermission = async (allowMusic: boolean) => {
-    setShowMusicDialog(false);
     setIsTransitioning(true);
-    
-    if (allowMusic && !musicStarted) {
-      // Start playing music with fade-in
-      try {
-        await playWithFadeIn();
-        setMusicStarted(true);
-      } catch (error) {
-        console.log("Audio playback failed:", error);
-      }
-    }
-    
-    // Navigate to message page
     setTimeout(() => {
       setLocation("/message");
     }, 1200);
   };
 
   const handleKeyDown = (e: React.KeyboardEvent) => {
-    if (
-      (e.key === "Enter" || e.key === " ") &&
-      showButton &&
-      !showMusicDialog
-    ) {
+    if ((e.key === "Enter" || e.key === " ") && showButton) {
       e.preventDefault();
       handleShowMessage();
     }
