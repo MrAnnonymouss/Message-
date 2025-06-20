@@ -8,6 +8,7 @@ import ParticleBackground from "@/components/ParticleBackground";
 export default function MessagePage() {
   const [, setLocation] = useLocation();
   const [showReturnButton, setShowReturnButton] = useState(false);
+  const [typingIntensity, setTypingIntensity] = useState<'normal' | 'fast'>('normal');
   const { displayText, isComplete } = useTypingAnimation(messageText, 80); // 80ms per character for faster reveal
   const { fadeOut, stop } = useAudio("/attached_assets/Song1_1750453164009.mp3");
 
@@ -20,6 +21,16 @@ export default function MessagePage() {
       return () => clearTimeout(timer);
     }
   }, [isComplete]);
+
+  // Dynamic typing intensity based on progress
+  useEffect(() => {
+    const progress = displayText.length / messageText.length;
+    if (progress > 0.7) {
+      setTypingIntensity('fast');
+    } else {
+      setTypingIntensity('normal');
+    }
+  }, [displayText.length, messageText.length]);
 
   const handleReturn = async () => {
     // Fade out music
@@ -56,7 +67,7 @@ export default function MessagePage() {
   return (
     <div 
       className={`w-full min-h-screen gradient-bg-message flex flex-col items-center justify-center p-8 md:p-12 lg:p-16 page-transition zoom-in-transition ${
-        !isComplete ? "typing" : ""
+        !isComplete ? (typingIntensity === 'fast' ? "typing-fast" : "typing") : ""
       }`}
       onKeyDown={handleKeyDown}
       tabIndex={0}
