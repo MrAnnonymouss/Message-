@@ -10,6 +10,19 @@ export function useAudio(src: string) {
       audioRef.current = new Audio(src);
       audioRef.current.loop = true;
       audioRef.current.preload = "auto";
+      
+      // Add error handling
+      audioRef.current.addEventListener('error', (e) => {
+        console.error("Audio loading error:", e);
+      });
+      
+      audioRef.current.addEventListener('loadstart', () => {
+        console.log("Audio loading started for:", src);
+      });
+      
+      audioRef.current.addEventListener('canplay', () => {
+        console.log("Audio ready to play:", src);
+      });
     }
     return audioRef.current;
   }, [src]);
