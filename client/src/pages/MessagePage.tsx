@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useLocation } from "wouter";
 import { useTypingAnimation } from "@/hooks/useTypingAnimation";
 import { useAudio } from "@/hooks/useAudio";
@@ -12,6 +12,7 @@ export default function MessagePage() {
   const [showPurpleGradient, setShowPurpleGradient] = useState(false);
   const { displayText, isComplete } = useTypingAnimation(messageText, 80); // 80ms per character for faster reveal
   const { fadeOut, stop } = useAudio("/attached_assets/Song1_1750453164009.mp3");
+  const scrollAreaRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (isComplete) {
@@ -41,6 +42,13 @@ export default function MessagePage() {
 
     return () => clearTimeout(purpleTimer);
   }, []);
+
+  // Auto-scroll to bottom when new content is added
+  useEffect(() => {
+    if (scrollAreaRef.current) {
+      scrollAreaRef.current.scrollTop = scrollAreaRef.current.scrollHeight;
+    }
+  }, [displayText]);
 
 
 
@@ -88,20 +96,22 @@ export default function MessagePage() {
     >
       <ParticleBackground type="message" particleCount={60} intensity="high" />
       
-      <div className="w-full max-w-5xl relative z-10">
+      <div className="w-full max-w-5xl relative z-10 flex flex-col max-h-[80vh]">
         <div className={`message-container ${!isComplete ? 'typing-active' : 'typing-complete'}`}>
-          <div className="message-text-clean font-bold text-2xl md:text-3xl lg:text-4xl xl:text-5xl leading-relaxed tracking-wide text-center">
-            {displayText.split('\n').map((line, index) => (
-              <p key={index} className="mb-6 md:mb-8">
-                {line}
-              </p>
-            ))}
+          <div className="message-scroll-area" ref={scrollAreaRef}>
+            <div className="message-text-clean font-bold text-2xl md:text-3xl lg:text-4xl xl:text-5xl leading-relaxed tracking-wide text-center">
+              {displayText.split('\n').map((line, index) => (
+                <p key={index} className="mb-6 md:mb-8">
+                  {line}
+                </p>
+              ))}
+            </div>
+            {!isComplete && (
+              <span className="typing-cursor-clean text-center block text-3xl md:text-4xl lg:text-5xl" aria-hidden="true">
+                |
+              </span>
+            )}
           </div>
-          {!isComplete && (
-            <span className="typing-cursor-clean text-center block text-3xl md:text-4xl lg:text-5xl" aria-hidden="true">
-              |
-            </span>
-          )}
         </div>
       </div>
       

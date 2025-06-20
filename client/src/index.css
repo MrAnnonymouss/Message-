@@ -205,6 +205,10 @@
   padding: 2rem 3rem;
   margin: 1rem;
   transition: all 0.3s ease-in-out;
+  display: flex;
+  flex-direction: column;
+  min-height: 200px;
+  max-height: 70vh;
 }
 
 .message-container.typing-active {
@@ -216,6 +220,36 @@
   animation: none;
   background: rgba(255, 255, 255, 0.08);
   border-color: rgba(255, 255, 255, 0.15);
+}
+
+/* Scrollable message area */
+.message-scroll-area {
+  overflow-y: auto;
+  overflow-x: hidden;
+  flex: 1;
+  padding-right: 8px;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.3) rgba(255, 255, 255, 0.1);
+}
+
+/* Custom scrollbar for webkit browsers */
+.message-scroll-area::-webkit-scrollbar {
+  width: 8px;
+}
+
+.message-scroll-area::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+}
+
+.message-scroll-area::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 4px;
+  transition: all 0.3s ease;
+}
+
+.message-scroll-area::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.5);
 }
 
 @keyframes typingRhythm {
@@ -591,11 +625,21 @@
     padding: 1.5rem 2rem;
     margin: 0.5rem;
     border-radius: 16px;
+    max-height: 75vh;
+    min-height: 150px;
   }
   
   .message-text-clean {
     font-size: 1rem !important;
     line-height: 1.6;
+  }
+  
+  .message-scroll-area {
+    padding-right: 6px;
+  }
+  
+  .message-scroll-area::-webkit-scrollbar {
+    width: 6px;
   }
   
   .particle {
@@ -612,6 +656,8 @@
     padding: 1.75rem 2.5rem;
     margin: 0.75rem;
     border-radius: 20px;
+    max-height: 70vh;
+    min-height: 180px;
   }
   
   .message-text-clean {
@@ -625,6 +671,8 @@
     padding: 2rem 3rem;
     margin: 1rem;
     border-radius: 24px;
+    max-height: 70vh;
+    min-height: 200px;
   }
   
   .message-text-clean {
