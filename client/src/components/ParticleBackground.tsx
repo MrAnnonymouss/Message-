@@ -77,7 +77,7 @@ export default function ParticleBackground({
       
       const colors = type === 'home' 
         ? ['rgba(255,255,255,0.8)', 'rgba(200,200,200,0.6)', 'rgba(150,150,150,0.4)']
-        : ['rgba(255,255,255,0.9)', 'rgba(255,182,193,0.7)', 'rgba(173,216,230,0.6)', 'rgba(221,160,221,0.8)'];
+        : ['rgba(255,255,255,0.9)', 'rgba(255,255,255,0.7)', 'rgba(230,230,250,0.8)', 'rgba(221,160,221,0.6)'];
 
       for (let i = 0; i < count; i++) {
         const baseSize = deviceType === 'mobile' ? 2 : deviceType === 'tablet' ? 4 : 6;

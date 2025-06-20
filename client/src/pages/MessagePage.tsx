@@ -76,19 +76,17 @@ export default function MessagePage() {
     >
       <ParticleBackground type="message" particleCount={60} intensity="high" />
       
-      <div className="w-full max-w-6xl relative z-10">
-        <div className="message-text text-white text-xl md:text-2xl lg:text-3xl leading-relaxed font-crimson tracking-wide">
-          {displayText.split('\n').map((line, index) => (
-            <p key={index} className="mb-4 md:mb-6 text-center">
-              {line}
-            </p>
-          ))}
-          {!isComplete && (
-            <span className="typing-cursor text-center block text-2xl md:text-3xl lg:text-4xl" aria-hidden="true">
-              |
-            </span>
-          )}
-        </div>
+      <div className="w-full max-w-5xl relative z-10 message-text text-white text-xl md:text-2xl lg:text-3xl leading-relaxed font-crimson tracking-wide">
+        {displayText.split('\n').map((line, index) => (
+          <p key={index} className="mb-6 md:mb-8 text-center">
+            {line}
+          </p>
+        ))}
+        {!isComplete && (
+          <span className="typing-cursor text-center block text-2xl md:text-3xl lg:text-4xl" aria-hidden="true">
+            |
+          </span>
+        )}
       </div>
       
       {showReturnButton && (
