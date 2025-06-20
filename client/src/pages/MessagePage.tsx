@@ -76,7 +76,6 @@ export default function MessagePage() {
       role="main"
       aria-label="Message page"
     >
-      <div className="gradient-overlay"></div>
       <ParticleBackground type="message" particleCount={60} intensity="high" />
       
       <div className="w-full max-w-5xl relative z-10 message-text text-white text-xl md:text-2xl lg:text-3xl leading-relaxed font-sf-pro tracking-wide font-light">
