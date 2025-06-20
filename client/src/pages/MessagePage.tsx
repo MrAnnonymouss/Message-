@@ -9,7 +9,6 @@ export default function MessagePage() {
   const [, setLocation] = useLocation();
   const [showReturnButton, setShowReturnButton] = useState(false);
   const [typingIntensity, setTypingIntensity] = useState<'normal' | 'fast'>('normal');
-  const [showCyan, setShowCyan] = useState(false);
   const { displayText, isComplete } = useTypingAnimation(messageText, 80); // 80ms per character for faster reveal
   const { fadeOut, stop } = useAudio("/attached_assets/Song1_1750453164009.mp3");
 
@@ -33,14 +32,7 @@ export default function MessagePage() {
     }
   }, [displayText.length, messageText.length]);
 
-  // Add cyan to gradient after 5 seconds
-  useEffect(() => {
-    const cyanTimer = setTimeout(() => {
-      setShowCyan(true);
-    }, 5000);
 
-    return () => clearTimeout(cyanTimer);
-  }, []);
 
   const handleReturn = async () => {
     // Fade out music
@@ -78,7 +70,7 @@ export default function MessagePage() {
     <div 
       className={`w-full min-h-screen gradient-bg-message flex flex-col items-center justify-center p-8 md:p-12 lg:p-16 page-transition zoom-in-transition ${
         !isComplete ? (typingIntensity === 'fast' ? "typing-fast" : "typing") : ""
-      } ${showCyan ? "cyan-enhanced" : ""}`}
+      }`}
       onKeyDown={handleKeyDown}
       tabIndex={0}
       role="main"

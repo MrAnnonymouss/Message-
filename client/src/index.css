@@ -393,20 +393,14 @@
   }
 }
 
-/* Elegant gradient background with cyan fade-in */
+/* Simple beautiful gradient background */
 .gradient-bg-message {
-  background: linear-gradient(-45deg, #667eea, #764ba2, #8e44ad, #9b59b6);
+  background: linear-gradient(-45deg, #667eea, #764ba2, #8e44ad, #9b59b6, #e056fd);
   background-size: 400% 400%;
   animation: gradientFlow 25s ease-in-out infinite;
   position: relative;
   overflow: hidden;
-  transition: all 2s ease-in-out;
-}
-
-.gradient-bg-message.cyan-enhanced {
-  background: linear-gradient(-45deg, #667eea, #00bcd4, #764ba2, #00e5ff, #8e44ad, #00acc1, #9b59b6);
-  background-size: 500% 500%;
-  animation: gradientFlowCyan 20s ease-in-out infinite;
+  transition: all 0.5s ease-in-out;
 }
 
 .gradient-bg-message.typing {
@@ -453,23 +447,7 @@
   }
 }
 
-@keyframes gradientFlowCyan {
-  0% {
-    background-position: 0% 50%;
-  }
-  25% {
-    background-position: 100% 75%;
-  }
-  50% {
-    background-position: 75% 100%;
-  }
-  75% {
-    background-position: 25% 25%;
-  }
-  100% {
-    background-position: 0% 50%;
-  }
-}
+
 
 /* Clean text without container */
 .message-text {
