@@ -43,7 +43,7 @@ export default function HomePage({ musicEnabled }: { musicEnabled: boolean }) {
       role="main"
       aria-label="Homepage"
     >
-      <ParticleBackground type="home" particleCount={40} />
+      <ParticleBackground type="home" particleCount={40} intensity="medium" />
       
       <button
         onClick={handleShowMessage}

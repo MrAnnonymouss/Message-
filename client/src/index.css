@@ -309,9 +309,21 @@
   }
 }
 
-/* Additional floating animation for variety */
-.particle:nth-child(odd) {
+/* Advanced particle animations */
+.particle-float {
+  animation: float 20s infinite linear;
+}
+
+.particle-floatSide {
   animation: floatSide 25s infinite linear;
+}
+
+.particle-spiral {
+  animation: spiral 30s infinite linear;
+}
+
+.particle-wave {
+  animation: wave 22s infinite ease-in-out;
 }
 
 @keyframes floatSide {
@@ -332,6 +344,129 @@
   100% {
     transform: translateY(-100vh) translateX(-50px) rotate(360deg);
     opacity: 0;
+  }
+}
+
+@keyframes spiral {
+  0% {
+    transform: translateY(100vh) translateX(0) rotate(0deg) scale(0.5);
+    opacity: 0;
+  }
+  25% {
+    transform: translateY(75vh) translateX(100px) rotate(90deg) scale(0.8);
+    opacity: 0.6;
+  }
+  50% {
+    transform: translateY(50vh) translateX(-100px) rotate(180deg) scale(1);
+    opacity: 0.9;
+  }
+  75% {
+    transform: translateY(25vh) translateX(50px) rotate(270deg) scale(0.8);
+    opacity: 0.6;
+  }
+  100% {
+    transform: translateY(-10vh) translateX(0) rotate(360deg) scale(0.3);
+    opacity: 0;
+  }
+}
+
+@keyframes wave {
+  0% {
+    transform: translateY(100vh) translateX(0) rotate(0deg);
+    opacity: 0;
+  }
+  25% {
+    transform: translateY(75vh) translateX(sin(90deg) * 80px) rotate(90deg);
+    opacity: 0.7;
+  }
+  50% {
+    transform: translateY(50vh) translateX(sin(180deg) * 120px) rotate(180deg);
+    opacity: 0.9;
+  }
+  75% {
+    transform: translateY(25vh) translateX(sin(270deg) * 80px) rotate(270deg);
+    opacity: 0.7;
+  }
+  100% {
+    transform: translateY(-10vh) translateX(0) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+/* Enhanced gradient background for better text visibility */
+.gradient-bg-message {
+  background: linear-gradient(-45deg, #667eea, #764ba2, #f093fb, #f5576c, #4facfe, #00f2fe, #ff9a9e, #fecfef, #ffecd2);
+  background-size: 800% 800%;
+  animation: gradientFlow 30s ease-in-out infinite;
+  position: relative;
+  overflow: hidden;
+}
+
+.gradient-bg-message.typing {
+  animation: gradientFlowTyping 8s ease-in-out infinite;
+}
+
+@keyframes gradientFlowTyping {
+  0% {
+    background-position: 0% 50%;
+  }
+  25% {
+    background-position: 100% 25%;
+  }
+  50% {
+    background-position: 75% 100%;
+  }
+  75% {
+    background-position: 25% 75%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* Responsive text visibility improvements */
+.message-text {
+  text-shadow: 
+    0 0 10px rgba(0,0,0,0.8),
+    0 0 20px rgba(0,0,0,0.6),
+    0 0 30px rgba(0,0,0,0.4);
+  backdrop-filter: blur(1px);
+  background: rgba(0,0,0,0.1);
+  border-radius: 10px;
+  padding: 1rem;
+}
+
+/* Mobile-first responsive design */
+@media (max-width: 767px) {
+  .message-text {
+    font-size: 1rem !important;
+    line-height: 1.6;
+    padding: 0.75rem;
+    margin-bottom: 1rem;
+  }
+  
+  .particle {
+    animation-duration: 15s !important;
+  }
+  
+  .gradient-bg-message {
+    background-size: 400% 400%;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+  .message-text {
+    font-size: 1.25rem !important;
+    line-height: 1.7;
+    padding: 1rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .message-text {
+    font-size: 1.5rem !important;
+    line-height: 1.8;
+    padding: 1.5rem;
   }
 }
 

@@ -63,21 +63,27 @@ export default function MessagePage() {
       role="main"
       aria-label="Message page"
     >
-      <ParticleBackground type="message" particleCount={60} />
+      <ParticleBackground type="message" particleCount={60} intensity="high" />
       
-      <div className="w-full max-w-6xl text-white text-xl md:text-2xl lg:text-3xl leading-relaxed font-crimson tracking-wide relative z-10">
-        {displayText.split('\n').map((line, index) => (
-          <p key={index} className="mb-6 text-center drop-shadow-lg">
-            {line}
-          </p>
-        ))}
-        {!isComplete && <span className="typing-cursor text-center block" aria-hidden="true">|</span>}
+      <div className="w-full max-w-6xl relative z-10">
+        <div className="message-text text-white text-xl md:text-2xl lg:text-3xl leading-relaxed font-crimson tracking-wide">
+          {displayText.split('\n').map((line, index) => (
+            <p key={index} className="mb-4 md:mb-6 text-center">
+              {line}
+            </p>
+          ))}
+          {!isComplete && (
+            <span className="typing-cursor text-center block text-2xl md:text-3xl lg:text-4xl" aria-hidden="true">
+              |
+            </span>
+          )}
+        </div>
       </div>
       
       {showReturnButton && (
         <button
           onClick={handleReturn}
-          className="mt-16 button-elegant text-white font-cormorant text-xl px-8 py-4 rounded-full hover:scale-105 transition-all duration-300 relative z-10 drop-shadow-lg"
+          className="mt-8 md:mt-12 lg:mt-16 button-elegant text-white font-cormorant text-lg md:text-xl px-6 md:px-8 py-3 md:py-4 rounded-full hover:scale-105 transition-all duration-300 relative z-10 drop-shadow-lg"
           aria-label="Return to homepage"
         >
           Return to Home
