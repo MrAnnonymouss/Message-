@@ -2,15 +2,33 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1" />
-    <title>A Message for You</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, maximum-scale=1.0" />
+    <title>Message for Aarohi</title>
+    <style>
+      html, body {
+        margin: 0 !important;
+        padding: 0 !important;
+        height: 100vh !important;
+        width: 100vw !important;
+        overflow: hidden !important;
+        position: fixed !important;
+        top: 0 !important;
+        left: 0 !important;
+      }
+      #root {
+        position: fixed !important;
+        inset: 0 !important;
+        height: 100vh !important;
+        width: 100vw !important;
+      }
+    </style>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500&family=Crimson+Text:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
     <meta name="description" content="A beautiful and heartfelt message crafted with elegance and care. Experience a sophisticated digital message with premium typography and stunning animations.">
     <meta property="og:title" content="A Message for You">
     <meta property="og:description" content="A beautiful and heartfelt message crafted with elegance and care.">
     <meta property="og:type" content="website">
   </head>
-  <body class="overflow-hidden">
+  <body style="margin:0!important;padding:0!important;height:100vh!important;width:100vw!important;overflow:hidden!important;position:fixed!important;">
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
     <!-- This is a replit script which adds a banner on the top of the page when opened in development mode outside the replit environment -->

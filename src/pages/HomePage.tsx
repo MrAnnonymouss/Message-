@@ -35,7 +35,7 @@ export default function HomePage({ musicEnabled }: { musicEnabled: boolean }) {
 
   return (
     <div
-      className={`w-full h-screen gradient-bg-home flex items-center justify-center relative page-transition ${
+      className={`fixed inset-0 w-screen h-screen gradient-bg-home flex items-center justify-center overflow-hidden page-transition ${
         isTransitioning ? "zoom-transition" : ""
       }`}
       onKeyDown={handleKeyDown}
