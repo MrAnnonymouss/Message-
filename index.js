@@ -23,7 +23,7 @@ app.get('/api/health', (req, res) => {
   res.json({ status: 'ok', message: 'Server is running' });
 });
 
-// Serve React app for all other routes
+// Handle all other routes - serve React app
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, 'dist', 'public', 'index.html'));
 });

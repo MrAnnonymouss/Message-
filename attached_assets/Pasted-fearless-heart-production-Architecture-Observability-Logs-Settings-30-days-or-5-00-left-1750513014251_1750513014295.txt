@@ -1,0 +1,161 @@
+fearless-heart
+
+
+production
+Architecture
+Observability
+Logs
+Settings
+
+30 days or $5.00 left
+
+
+Share
+
+
+
+
+
+Activity
+
+web
+
+Deployment failed
+
+76 seconds ago
+
+
+New environment
+
+mrannonymouss
+
+·
+81 seconds ago
+
+
+web
+Deployments
+Variables
+Metrics
+Settings
+web-production-485ff.up.railway.app
+europe-west4-drams3a
+1 Replica
+
+
+
+
+
+
+
+
+
+
+
+web
+/
+19e0551
+Jun 21, 2025 7:05 PM
+
+Failed
+
+web-production-485ff.up.railway.app
+Get Help
+
+Details
+Build Logs
+Deploy Logs
+HTTP Logs
+
+Filter
+Filter logs using "", (), AND, OR, -
+
+
+
+You reached the start of the range → Jun 21, 2025 7:05 PM
+
+[stage-0  8/15] COPY . /app/.  ✔ 35ms
+
+[stage-0  9/15] RUN  caddy fmt --overwrite /assets/Caddyfile
+
+[stage-0  9/15] RUN  caddy fmt --overwrite /assets/Caddyfile  ✔ 144ms
+
+[stage-0 10/15] COPY . /app/.
+
+[stage-0 10/15] COPY . /app/.  ✔ 75ms
+
+[stage-0 11/15] RUN --mount=type=cache,id=s/5f1850cc-15ba-4c7d-90ba-e844c3993e62-/root/npm,target=/root/.npm npm ci
+
+npm warn config production Use `--omit=dev` instead.
+
+
+added 395 packages, and audited 396 packages in 6s
+
+61 packages are looking for funding
+  run `npm fund` for details
+
+
+4 vulnerabilities (1 low, 3 moderate)
+
+To address all issues, run:
+  npm audit fix
+
+Run `npm audit` for details.
+
+[stage-0 11/15] RUN --mount=type=cache,id=s/5f1850cc-15ba-4c7d-90ba-e844c3993e62-/root/npm,target=/root/.npm npm ci  ✔ 6s
+
+[stage-0 12/15] COPY . /app/.
+
+[stage-0 12/15] COPY . /app/.  ✔ 114ms
+
+[stage-0 13/15] RUN --mount=type=cache,id=s/5f1850cc-15ba-4c7d-90ba-e844c3993e62-node_modules/cache,target=/app/node_modules/.cache npm run build
+
+npm warn config production Use `--omit=dev` instead.
+
+
+> aarohi-message-app@1.0.0 build
+> vite build
+
+
+failed to load config from /app/vite.config.ts
+
+error during build:
+Error [ERR_MODULE_NOT_FOUND]: Cannot find package '@replit/vite-plugin-runtime-error-modal' imported from /app/vite.config.ts.timestamp-1750512963281-741628087e0f.mjs
+    at packageResolve (node:internal/modules/esm/resolve:838:9)
+    at moduleResolve (node:internal/modules/esm/resolve:907:18)
+    at defaultResolve (node:internal/modules/esm/resolve:1037:11)
+    at ModuleLoader.defaultResolve (node:internal/modules/esm/loader:650:12)
+    at #cachedDefaultResolve (node:internal/modules/esm/loader:599:25)
+    at ModuleLoader.resolve (node:internal/modules/esm/loader:582:38)
+    at ModuleLoader.getModuleJobForImport (node:internal/modules/esm/loader:241:38)
+    at ModuleJob._link (node:internal/modules/esm/module_job:132:49)
+
+✕ [stage-0 13/15] RUN --mount=type=cache,id=s/5f1850cc-15ba-4c7d-90ba-e844c3993e62-node_modules/cache,target=/app/node_modules/.cache npm run build 
+process "/bin/bash -ol pipefail -c npm run build" did not complete successfully: exit code: 1
+ 
+
+Dockerfile:30
+
+-------------------
+
+28 |     # build phase
+
+29 |     COPY . /app/.
+
+30 | >>> RUN --mount=type=cache,id=s/5f1850cc-15ba-4c7d-90ba-e844c3993e62-node_modules/cache,target=/app/node_modules/.cache npm run build
+
+31 |
+
+32 |
+
+-------------------
+
+ERROR: failed to solve: process "/bin/bash -ol pipefail -c npm run build" did not complete successfully: exit code: 1
+
+Error: Docker build failed
+You reached the present time
+
+Try Loading More
+
+
+web | Railway
