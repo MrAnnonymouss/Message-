@@ -86,7 +86,7 @@ export default function MessagePage() {
 
   return (
     <div 
-      className={`fixed inset-0 w-screen h-screen w-full min-h-screen max-h-screen min-w-full max-w-full gradient-bg-message flex flex-col items-center justify-center p-8 md:p-12 lg:p-16 page-transition zoom-in-transition overflow-hidden ${
+      className={`fixed inset-0 w-screen h-screen w-full min-h-screen max-h-screen min-w-full max-w-full gradient-bg-message flex items-center justify-center overflow-hidden page-transition zoom-in-transition ${
         !isComplete ? (typingIntensity === 'fast' ? "typing-fast" : "typing") : ""
       } ${showPurpleGradient ? "purple-transition" : ""}`}
       style={{position: 'fixed', inset: '0', height: '100vh', width: '100vw', overflow: 'hidden'}}
@@ -97,34 +97,38 @@ export default function MessagePage() {
     >
       <ParticleBackground type="message" particleCount={60} intensity="high" />
       
-      <div className="w-full max-w-5xl relative z-10 flex flex-col max-h-[80vh]">
-        <div className={`message-container ${!isComplete ? 'typing-active' : 'typing-complete'}`}>
-          <div className="message-scroll-area" ref={scrollAreaRef}>
-            <div className="message-text-clean font-bold text-2xl md:text-3xl lg:text-4xl xl:text-5xl leading-relaxed tracking-wide text-center">
-              {displayText.split('\n').map((line, index) => (
-                <p key={index} className="mb-6 md:mb-8">
-                  {line}
-                </p>
-              ))}
+      <div className="absolute inset-0 flex items-center justify-center p-4 sm:p-6 md:p-8 lg:p-12">
+        <div className="message-page-container bg-black bg-opacity-30 backdrop-blur-xl border border-white border-opacity-25 rounded-[2.5rem] p-6 sm:p-8 md:p-10 lg:p-12 xl:p-16 w-full max-w-xs sm:max-w-sm md:max-w-2xl lg:max-w-4xl xl:max-w-6xl h-[80vh] sm:h-[85vh] flex flex-col shadow-2xl relative z-10">
+          <div className={`message-container flex-1 ${!isComplete ? 'typing-active' : 'typing-complete'}`}>
+            <div className="message-scroll-area h-full overflow-y-auto overflow-x-hidden" ref={scrollAreaRef}>
+              <div className="message-text-clean font-bold text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl 2xl:text-5xl leading-relaxed tracking-wide text-center px-2 sm:px-4 md:px-6">
+                {displayText.split('\n').map((line, index) => (
+                  <p key={index} className="mb-4 sm:mb-6 md:mb-8">
+                    {line}
+                  </p>
+                ))}
+              </div>
+              {!isComplete && (
+                <span className="typing-cursor-clean text-center block text-2xl sm:text-3xl md:text-4xl lg:text-5xl" aria-hidden="true">
+                  |
+                </span>
+              )}
             </div>
-            {!isComplete && (
-              <span className="typing-cursor-clean text-center block text-3xl md:text-4xl lg:text-5xl" aria-hidden="true">
-                |
-              </span>
-            )}
           </div>
+          
+          {showReturnButton && (
+            <div className="flex justify-center mt-6 sm:mt-8 md:mt-10 pt-4 sm:pt-6 border-t border-white border-opacity-20">
+              <button
+                onClick={handleReturn}
+                className="premium-button text-white font-bold text-base sm:text-lg md:text-xl px-6 sm:px-8 md:px-10 py-3 sm:py-4 md:py-5 rounded-full hover:scale-105 transition-all duration-300 shadow-2xl min-w-[160px] sm:min-w-[180px] md:min-w-[200px]"
+                aria-label="Return to homepage"
+              >
+                Return to Home
+              </button>
+            </div>
+          )}
         </div>
       </div>
-      
-      {showReturnButton && (
-        <button
-          onClick={handleReturn}
-          className="mt-8 md:mt-12 lg:mt-16 premium-button text-white font-bold text-lg md:text-xl px-8 md:px-10 py-4 md:py-5 rounded-full hover:scale-105 transition-all duration-300 relative z-10"
-          aria-label="Return to homepage"
-        >
-          Return to Home
-        </button>
-      )}
     </div>
   );
 }

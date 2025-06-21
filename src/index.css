@@ -380,6 +380,90 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+/* Curved container animations */
+.music-permission-container {
+  box-shadow: 
+    0 25px 50px rgba(0, 0, 0, 0.3),
+    0 0 40px rgba(255, 255, 255, 0.1),
+    inset 0 0 30px rgba(255, 255, 255, 0.05);
+}
+
+.show-button-container {
+  box-shadow: 
+    0 20px 40px rgba(0, 0, 0, 0.2),
+    0 0 30px rgba(255, 255, 255, 0.08),
+    inset 0 0 25px rgba(255, 255, 255, 0.03);
+}
+
+.message-page-container {
+  box-shadow: 
+    0 30px 60px rgba(0, 0, 0, 0.4),
+    0 0 50px rgba(255, 255, 255, 0.12),
+    inset 0 0 40px rgba(255, 255, 255, 0.06);
+}
+
+.animate-fade-in-up {
+  animation: fade-in-up 1.5s ease-out forwards;
+}
+
+@keyframes fade-in-up {
+  from {
+    opacity: 0;
+    transform: translateY(30px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* Responsive curved containers */
+@media (max-width: 640px) {
+  .music-permission-container {
+    border-radius: 1.5rem;
+    padding: 1.5rem;
+  }
+  
+  .show-button-container {
+    border-radius: 2rem;
+    padding: 1.5rem;
+  }
+  
+  .message-page-container {
+    border-radius: 2rem;
+    padding: 1.5rem;
+    height: 85vh;
+  }
+}
+
+@media (min-width: 641px) and (max-width: 768px) {
+  .music-permission-container {
+    border-radius: 2rem;
+  }
+  
+  .show-button-container {
+    border-radius: 2.5rem;
+  }
+  
+  .message-page-container {
+    border-radius: 2.5rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .music-permission-container {
+    border-radius: 2.5rem;
+  }
+  
+  .show-button-container {
+    border-radius: 3.5rem;
+  }
+  
+  .message-page-container {
+    border-radius: 3rem;
+  }
+}
+
 /* Stunning animated gradient backgrounds with particles */
 .gradient-bg-home {
   background: linear-gradient(-45deg, #000000, #1a1a1a, #2a2a2a, #1f1f1f, #0a0a0a, #333333);
