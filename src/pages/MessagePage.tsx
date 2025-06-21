@@ -86,9 +86,10 @@ export default function MessagePage() {
 
   return (
     <div 
-      className={`fixed inset-0 w-screen h-screen gradient-bg-message flex flex-col items-center justify-center p-8 md:p-12 lg:p-16 page-transition zoom-in-transition overflow-hidden ${
+      className={`fixed inset-0 w-screen h-screen w-full min-h-screen max-h-screen min-w-full max-w-full gradient-bg-message flex flex-col items-center justify-center p-8 md:p-12 lg:p-16 page-transition zoom-in-transition overflow-hidden ${
         !isComplete ? (typingIntensity === 'fast' ? "typing-fast" : "typing") : ""
       } ${showPurpleGradient ? "purple-transition" : ""}`}
+      style={{position: 'fixed', inset: '0', height: '100vh', width: '100vw', overflow: 'hidden'}}
       onKeyDown={handleKeyDown}
       tabIndex={0}
       role="main"

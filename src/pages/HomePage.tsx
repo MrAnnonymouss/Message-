@@ -35,9 +35,10 @@ export default function HomePage({ musicEnabled }: { musicEnabled: boolean }) {
 
   return (
     <div
-      className={`fixed inset-0 w-screen h-screen gradient-bg-home flex items-center justify-center overflow-hidden page-transition ${
+      className={`fixed inset-0 w-screen h-screen w-full min-h-screen max-h-screen min-w-full max-w-full gradient-bg-home flex items-center justify-center overflow-hidden page-transition ${
         isTransitioning ? "zoom-transition" : ""
       }`}
+      style={{position: 'fixed', inset: '0', height: '100vh', width: '100vw', overflow: 'hidden'}}
       onKeyDown={handleKeyDown}
       tabIndex={0}
       role="main"
