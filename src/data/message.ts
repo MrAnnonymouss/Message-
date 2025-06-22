@@ -1,5 +1,11 @@
-export const messageText = `Oyee
+export const messageText = `
+Oyee
 Hi Aarohi :)
+
+This One Is For You -: "Jise Mehfil Ne Thukray Humko 
+Kyu Usee Mehfil Ko Yaad Kare !! 
+Aage lamhe Bula Rahe Aavu Unke Saath Chale !!!"
+
 
 I hope and pray you're doing well, and that life is treating you with peace and a little sparkle ✨
 I also hope your exams went amazing—on a total winning streak! 😄
